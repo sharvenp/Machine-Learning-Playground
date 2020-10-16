@@ -8,6 +8,6 @@ class Observable:
         if o not in self.observers:
             self.observers.append(o)
 
-    def notify_observers(self):
+    def notify_observers(self, command):
         for o in self.observers:
-            o.update(self)
+            o.update(self, command)

@@ -5,10 +5,10 @@ Prep Work:
 Main App:
     ✔ Set up MVC pattern @done(20-10-15 22:24)
     ☐ Implement system to place training binary data points
-        ☐ Place data point
-        ☐ Select type of data point
+        ✔ Place data point @done(20-10-16 11:19)
+        ✔ Select type of data point @done(20-10-16 11:20)
         ☐ Clear data point
-        ☐ Clear all data points
+        ✔ Clear all data points @done(20-10-16 11:38)
         
 Models:
     ☐ Implement KNN visualization

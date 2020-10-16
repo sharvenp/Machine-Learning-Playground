@@ -1,9 +1,10 @@
-
 class Settings:
 
+    # App settings
     APP_THEME = "LightBrown13"
+    GRAPH_WIDTH = 400
+    GRID_WIDTH = 50
 
-    WINDOW_WIDTH = 200
-    WINDOW_HEIGHT = 200
+    # Color settings
+    COLOR_MAP = {1: "red", 2: "blue"}
 
-    GRID_DIMENSIONS = 50

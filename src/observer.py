@@ -1,5 +1,4 @@
-
 class Observer:
 
-    def update(self):
+    def update(self, observer, command):
         raise NotImplementedError
