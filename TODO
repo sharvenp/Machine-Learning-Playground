@@ -1,0 +1,17 @@
+
+Prep Work:
+    ✔ Set up PySimpleGUI @done(20-10-15 21:35)
+
+Main App:
+    ✔ Set up MVC pattern @done(20-10-15 22:24)
+    ☐ Implement system to place training binary data points
+        ☐ Place data point
+        ☐ Select type of data point
+        ☐ Clear data point
+        ☐ Clear all data points
+        
+Models:
+    ☐ Implement KNN visualization
+    ☐ Implement Logistic Regression visualization
+    ☐ Implement Neural Net visualization
+    # Add More ...
