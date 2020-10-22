@@ -4,14 +4,17 @@ Prep Work:
 
 Main App:
     ✔ Set up MVC pattern @done(20-10-15 22:24)
-    ☐ Implement system to place training binary data points
+    ✔ Implement system to place training binary data points @done(20-10-21 23:50)
         ✔ Place data point @done(20-10-16 11:19)
         ✔ Select type of data point @done(20-10-16 11:20)
-        ☐ Clear data point
+        ✔ Clear data point @done(20-10-21 23:50)
         ✔ Clear all data points @done(20-10-16 11:38)
         
+    ☐ Allow for hyperparameter specification
+        ☐ Implement input panels for different algorithms 
+
 Models:
-    ☐ Implement KNN visualization
+    ✔ Implement KNN visualization @done(20-10-22 00:55)
     ☐ Implement Logistic Regression visualization
     ☐ Implement Neural Net visualization
     # Add More ...
