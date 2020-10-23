@@ -12,7 +12,7 @@ class KNN(Algorithm):
         try:
             self._k_val = int(event_vals["knn_k_val"])
         except ValueError:
-            show_popup(1, "Invalid K Value", "The inputted value for K is not integer.\n\nPlease input an integer.")
+            show_popup(1, "Invalid K Value", "The inputted value for K is not an integer.\n\nPlease input an integer.")
             return
 
         if self._k_val > X_train.shape[0]:

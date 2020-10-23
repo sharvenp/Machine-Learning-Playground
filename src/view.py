@@ -24,6 +24,13 @@ class View(Observer):
              sg.Radio('L2', 'logreg_reg', size=(4, 1), font=("Consolas", 11), key="logreg_reg_l2")]
         ]
 
+        tab_nn = [
+            [sg.Text('Hidden Layers:', size=(14, 1)), sg.InputText(key="nn_nhl")],
+            [sg.Text('Learning Rate:', size=(14, 1)), sg.InputText(key="nn_lr")],
+            [sg.Text('L2 Regularization:', size=(14, 1)), sg.InputText(key="nn_reg")],
+            [sg.Text('Epochs:', size=(14, 1)), sg.InputText(key="nn_epochs")],
+        ]
+
         app_layout = [[sg.Graph(
             canvas_size=(Settings.GRAPH_WIDTH, Settings.GRAPH_WIDTH),
             graph_bottom_left=(0, 0),
@@ -39,7 +46,8 @@ class View(Observer):
             [sg.TabGroup(
                 [
                     [sg.Tab('KNN', tab_knn, tooltip='KNN Algorithm', key="0")],
-                    [sg.Tab('Logistic Regression', tab_logreg, tooltip='Logistic Regression Algorithm', key='1')]
+                    [sg.Tab('Logistic Regression', tab_logreg, tooltip='Logistic Regression', key='1')],
+                    [sg.Tab('Neural Net', tab_nn, tooltip='Neural Net', key='2')]
                 ], key='tab_group')],
 
             [sg.Button('Predict', key='predict'), sg.Button('Clear All', key='clear')]

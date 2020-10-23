@@ -1,7 +1,7 @@
 class Settings:
     # App settings
     APP_THEME = "LightBrown13"
-    GRAPH_WIDTH = 400
+    GRAPH_WIDTH = 450
     GRID_WIDTH = 50
 
     # Color settings

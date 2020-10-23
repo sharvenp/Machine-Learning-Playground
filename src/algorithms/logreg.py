@@ -1,7 +1,6 @@
 from algorithms.algorithm import Algorithm
 from sklearn.linear_model import LogisticRegression as LogReg
 import numpy as np
-from utils.popup_message import show_popup
 
 
 class LogisticRegression(Algorithm):
