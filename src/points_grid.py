@@ -57,11 +57,15 @@ class PointGrid(Observable):
 
         return X_train, T_train
 
-    def predict(self, algorithm_i):
+    def predict(self, algorithm_i, event_vals):
 
         X_train, Y_train = self._get_data()
 
-        self._algorithm = AlgorithmFactory.get_algorithm(algorithm_i, X_train, Y_train)
+        self._algorithm = AlgorithmFactory.get_algorithm(algorithm_i, event_vals, X_train, Y_train)
+
+        if not self._algorithm.is_model_initialized():
+            return
+
         self._algorithm.train()
 
         self.notify_observers((Commands.CLEAR_ALL,))

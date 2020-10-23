@@ -13,6 +13,17 @@ class View(Observer):
 
         sg.theme(Settings.APP_THEME)
 
+        tab_knn = [
+            [sg.Text('K:', size=(2, 1)), sg.InputText(key="knn_k_val")],
+        ]
+
+        tab_logreg = [
+            [sg.Text('Regularization:', size=(10, 1)),
+             sg.Radio('None', 'logreg_reg', default=True, size=(4, 1), font=("Consolas", 11), key="logreg_reg_none"),
+             sg.Radio('L1', 'logreg_reg', size=(4, 1), font=("Consolas", 11), key="logreg_reg_l1"),
+             sg.Radio('L2', 'logreg_reg', size=(4, 1), font=("Consolas", 11), key="logreg_reg_l2")]
+        ]
+
         app_layout = [[sg.Graph(
             canvas_size=(Settings.GRAPH_WIDTH, Settings.GRAPH_WIDTH),
             graph_bottom_left=(0, 0),
@@ -20,9 +31,17 @@ class View(Observer):
             key="graph",
             enable_events=True,
             background_color="lightgray")],
-            [sg.Radio('■', 'class', default=True, size=(3, 1), text_color="red", font=("Consolas", 15), key="0_radio"),
-             sg.Radio('■', 'class', size=(3, 1), text_color="blue", font=("Consolas", 15), key="1_radio"),
-             sg.Radio('⌫', 'class', size=(3, 1), text_color="black", font=("Consolas", 15), key="erase_radio")],
+
+            [sg.Radio('■', 'point', default=True, size=(3, 1), text_color="red", font=("Consolas", 15), key="0_radio"),
+             sg.Radio('■', 'point', size=(3, 1), text_color="blue", font=("Consolas", 15), key="1_radio"),
+             sg.Radio('⌫', 'point', size=(3, 1), text_color="black", font=("Consolas", 15), key="erase_radio")],
+
+            [sg.TabGroup(
+                [
+                    [sg.Tab('KNN', tab_knn, tooltip='KNN Algorithm', key="0")],
+                    [sg.Tab('Logistic Regression', tab_logreg, tooltip='Logistic Regression Algorithm', key='1')]
+                ], key='tab_group')],
+
             [sg.Button('Predict', key='predict'), sg.Button('Clear All', key='clear')]
         ]
 
@@ -91,7 +110,7 @@ class View(Observer):
                     self.controller.remove_point(values['graph'])
 
             elif event == 'predict':
-                self.controller.predict(0)
+                self.controller.predict(int(values["tab_group"]), values)
             elif event == 'clear':
                 self.controller.clear_grid()
 

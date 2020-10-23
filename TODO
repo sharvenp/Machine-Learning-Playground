@@ -10,11 +10,11 @@ Main App:
         ✔ Clear data point @done(20-10-21 23:50)
         ✔ Clear all data points @done(20-10-16 11:38)
         
-    ☐ Allow for hyperparameter specification
-        ☐ Implement input panels for different algorithms 
+    ✔ Allow for hyperparameter specification @done(20-10-22 23:35)
+        ✔ Implement input panels for different algorithms @done(20-10-22 23:35)
 
 Models:
     ✔ Implement KNN visualization @done(20-10-22 00:55)
-    ☐ Implement Logistic Regression visualization
+    ✔ Implement Logistic Regression visualization @done(20-10-22 23:35)
     ☐ Implement Neural Net visualization
     # Add More ...

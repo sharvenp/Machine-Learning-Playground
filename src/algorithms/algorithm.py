@@ -1,3 +1,5 @@
+from utils.popup_message import show_popup
+
 
 class Algorithm:
 
@@ -13,8 +15,10 @@ class Algorithm:
         if self._model:
             self.predict(point)
         else:
-            print("No model trained!")
+            show_popup(0, "No Model Trained", "Please train the model before predicting")
 
     def predict(self, point):
         raise NotImplementedError;
 
+    def is_model_initialized(self):
+        return self._model is not None

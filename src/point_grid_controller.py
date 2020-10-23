@@ -24,5 +24,5 @@ class PointGridController:
     def clear_grid(self):
         self._point_grid.clear_grid()
 
-    def predict(self, algorithm):
-        self._point_grid.predict(algorithm)
+    def predict(self, algorithm, event_vals):
+        self._point_grid.predict(algorithm, event_vals)
