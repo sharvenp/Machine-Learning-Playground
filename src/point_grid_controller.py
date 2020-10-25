@@ -26,3 +26,9 @@ class PointGridController:
 
     def predict(self, algorithm, event_vals):
         self._point_grid.predict(algorithm, event_vals)
+
+    def save(self, path):
+        self._point_grid.save_grid(path)
+
+    def load(self, path):
+        self._point_grid.load_grid(path)

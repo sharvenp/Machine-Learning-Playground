@@ -51,11 +51,12 @@ class NeuralNet(Algorithm):
                                                       "integer.\n\nPlease input an integer.")
             return
 
-        self._model = MLPClassifier(solver='lbfgs', alpha=self._reg, learning_rate_init=self._lr,
+        self._model = MLPClassifier(solver='adam', alpha=self._reg, learning_rate_init=self._lr,
                                     hidden_layer_sizes=tuple(self._hidden_layers), random_state=1,
                                     max_iter=self._epochs)
 
-        # print(f"KNN: K={self._k_val}")
+        print(f"Neural Net: Hidden Layers={self._hidden_layers} LR={self._lr} L2 Penalty={self._reg} "
+              f"Epochs={self._epochs}")
 
     def train(self):
         self._model.fit(self.X_train, self.Y_train)

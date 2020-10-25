@@ -14,7 +14,8 @@ Main App:
         ✔ Implement input panels for different algorithms @done(20-10-22 23:35)
 
     ☐ Implement progress bar to show learning
-    ☐ Implement saving/loading data
+    ✔ Implement saving/loading data @done(20-10-24 23:37)
+    ✔ Implement mouse dragging @done(20-10-24 22:28)
 
 Models:
     ✔ Implement KNN visualization @done(20-10-22 00:55)

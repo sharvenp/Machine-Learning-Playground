@@ -3,6 +3,9 @@ import PySimpleGUI as sg
 from settings import Settings
 from observer import Observer
 from commands import Commands
+from utils.popup_message import show_popup
+from tkinter import filedialog
+from tkinter import *
 
 
 class View(Observer):
@@ -37,6 +40,7 @@ class View(Observer):
             graph_top_right=(Settings.GRAPH_WIDTH, Settings.GRAPH_WIDTH),
             key="graph",
             enable_events=True,
+            drag_submits=True,
             background_color="lightgray")],
 
             [sg.Radio('■', 'point', default=True, size=(3, 1), text_color="red", font=("Consolas", 15), key="0_radio"),
@@ -50,8 +54,10 @@ class View(Observer):
                     [sg.Tab('Neural Net', tab_nn, tooltip='Neural Net', key='2')]
                 ], key='tab_group')],
 
-            [sg.Button('Predict', key='predict'), sg.Button('Clear All', key='clear')]
-        ]
+            [sg.Button('Predict', key='predict'),
+             sg.Button('Clear All', key='clear'),
+             sg.Button('Load Data', key='load'),
+             sg.Button('Save Data', key='save')]]
 
         self.window = sg.Window(title="Machine Learning Playground", layout=app_layout)
         self.window.Finalize()
@@ -84,7 +90,14 @@ class View(Observer):
                 self._drawn_figures.pop(point)
 
         elif command_id == Commands.CLEAR_ALL:
+
             self._clear_graph()
+
+        elif command_id == Commands.DRAW_ALL:
+
+            points = command[1]
+            self._clear_graph()
+            self.draw_all(points)
 
     def _draw_point(self, point, class_val):
         row, col = point
@@ -99,6 +112,10 @@ class View(Observer):
     def _clear_graph(self):
         self.graph.Erase()
         self._drawn_figures = {}
+
+    def draw_all(self, points):
+        for (point, class_val) in points:
+            self._draw_point(point, class_val)
 
     def launch(self):
 
@@ -118,8 +135,28 @@ class View(Observer):
                     self.controller.remove_point(values['graph'])
 
             elif event == 'predict':
-                self.controller.predict(int(values["tab_group"]), values)
+                if self._drawn_figures:
+                    self.controller.predict(int(values["tab_group"]), values)
+                else:
+                    show_popup(0, "No Points", "There are no training points.\n\nPlease place some training points to "
+                                               "predict.")
             elif event == 'clear':
                 self.controller.clear_grid()
+            elif event == 'load':
+                root = Tk()
+                root.withdraw()
+                filename = filedialog.askopenfilename(initialdir='/Documents', title="Load Data",
+                                                      filetypes=[("Machine Learning Playground Files", "*.mlpg")])
+                if filename:
+                    self.controller.load(filename)
+            elif event == 'save':
+                if self._drawn_figures:
+                    f = filedialog.asksaveasfile(mode='w', title="Save Data",
+                                                 filetypes=[("Machine Learning Playground Files", "*.mlpg")])
+                    if f:
+                        self.controller.save(f.name+".mlpg")
+                else:
+                    show_popup(0, "No Points", "There are no training points.\n\nPlease place some training points to "
+                                               "save.")
 
         self.window.close()

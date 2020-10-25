@@ -4,6 +4,8 @@ from settings import Settings
 from commands import Commands
 import numpy as np
 import random
+import json
+from utils.popup_message import show_popup
 
 
 def _check_in_bounds(point):
@@ -82,3 +84,45 @@ class PointGrid(Observable):
 
     def get_grid(self):
         return self._grid
+
+    def save_grid(self, path):
+        try:
+            with open(path, 'w') as f:
+                for point in self._grid:
+                    row, col = point
+                    class_val = self._grid[point]
+                    f.write(f"{row},{col},{class_val}\n")
+                print(f"Saved to: {path}")
+        except Exception as e:
+            show_popup(1, "Save Error", "Encountered error while saving data:\n\n" + str(e))
+
+    def load_grid(self, path):
+        temp_grid = {}
+        try:
+            with open(path, 'r') as f:
+                for line in f:
+                    line = line.strip()
+                    vals = line.split(",")
+                    if len(vals) != 3:
+                        raise ValueError(f"Encountered invalid line formatting:\n{line}")
+
+                    try:
+                        row = int(vals[0])
+                        col = int(vals[1])
+                        class_val = int(vals[2])
+                    except ValueError:
+                        raise ValueError(f"Encountered non-integer values in line:\n{line}")
+
+                    if class_val != 1 and class_val != 2:
+                        raise ValueError(f"Encountered invlaid class value:\n{class_val}")
+
+                    if not _check_in_bounds((row, col)):
+                        raise ValueError(f"Encountered out-of-bound point coordinates:\n{(row, col)}")
+
+                    temp_grid[(row, col)] = class_val
+
+                self._grid = temp_grid
+                self.notify_observers((Commands.DRAW_ALL, list(self._grid.items())))
+
+        except Exception as e:
+            show_popup(1, "Load Error", "Encountered error while loading data:\n\n" + str(e))
